@@ -1,8 +1,11 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import re
-''' This program crawls wikipedia and obtains the title, the first paragraph, and navigate to another article'''
+''' This program crawls wikipedia articles that the program hsve not visited before to avoid duplicate entries, 
+then obtains the title, the first paragraph, and navigate to another article'''
 pages = set()
+
+
 def getLinks(pageUrl):
     global pages
     html = urlopen('https://en.wikipedia.org/wiki/Combinatorics'.format(pageUrl))  # Read the wikipedia article
@@ -17,10 +20,12 @@ def getLinks(pageUrl):
     for link in bs.find_all('a', href=re.compile('^(/wiki/)')):
         if 'href' in link.attrs:
             if link.attrs['href'] not in pages:
-                #We have encountered a new page
-                newPage = link.attrs['href']
+                # We have encountered a new page
+                newPage = link.attrs['href']# Get attributes unly from href html tag
                 print('-'*20)
                 print(newPage)
                 pages.add(newPage)
                 getLinks(newPage)
-getLinks('')
+
+
+getLinks('')# Call the getLinks Function
