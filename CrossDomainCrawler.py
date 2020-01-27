@@ -7,7 +7,8 @@ import random
 
 pages = set()
 random.seed(datetime.datetime.now())
-
+allExtLinks = set()
+allIntLinks = set()
 
 # Retrieves a list of all Internal links found on a page
 def getInternalLinks(bs, includeUrl):
@@ -63,8 +64,7 @@ def followExternalOnly(startingSite):
     followExternalOnly(externalLink)
     followExternalOnly('https://stackoverflow.com/')
 
-allExtLinks = set()
-allIntLinks = set()
+
 def getAllExternalLinks(siteUrl):
     html = urlopen(siteUrl)
     domain = '{}://{}'.format(urlparse(siteUrl).scheme,
