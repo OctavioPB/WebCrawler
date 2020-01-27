@@ -5,6 +5,7 @@ import re
 import datetime
 import random
 
+# Set up environment variables
 pages = set()
 random.seed(datetime.datetime.now())
 allExtLinks = set()
@@ -17,7 +18,7 @@ def getInternalLinks(bs, includeUrl):
     internalLinks = []
     # Finds all links that begin with a "/"
     for link in bs.find_all('a',
-        href=re.compile('^(/|.*'+includeUrl+')')):
+        href=re.compile('^(/|.*'+includeUrl+')')): # RegEx to only find and add links
         if link.attrs['href'] is not None:
          if link.attrs['href'] not in internalLinks:
             if(link.attrs['href'].startswith('/')):
@@ -83,5 +84,8 @@ def getAllExternalLinks(siteUrl):
             getAllExternalLinks(link)
 
 #allIntLinks.add('https://stackoverflow.com/')
-followExternalOnly('https://stackoverflow.com/')
-getAllExternalLinks('https://stackoverflow.com/')
+try:
+    followExternalOnly('https://stackoverflow.com/')
+except:
+    print('END OF CODE')
+#getAllExternalLinks('https://stackoverflow.com/')
