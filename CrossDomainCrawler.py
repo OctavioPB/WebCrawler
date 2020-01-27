@@ -8,9 +8,8 @@ import random
 pages = set()
 random.seed(datetime.datetime.now())
 
+
 # Retrieves a list of all Internal links found on a page
-
-
 def getInternalLinks(bs, includeUrl):
     includeUrl = '{}://{}'.format(urlparse(includeUrl).scheme,
         urlparse(includeUrl).netloc)
@@ -27,9 +26,8 @@ def getInternalLinks(bs, includeUrl):
                 internalLinks.append(link.attrs['href'])
     return internalLinks
 
+
 # Retrieves a list of all external links found on a page
-
-
 def getExternalLinks(bs, excludeUrl):
     externalLinks = []
     # Finds all links that start with "http" that do
@@ -43,6 +41,7 @@ def getExternalLinks(bs, excludeUrl):
     return externalLinks
 
 
+# Retrieves a random external link found on a page
 def getRandomExternalLink(startingPage):
     html = urlopen(startingPage)
     bs = BeautifulSoup(html, 'html.parser')
@@ -62,7 +61,7 @@ def followExternalOnly(startingSite):
     externalLink = getRandomExternalLink(startingSite)
     print('Random external link is: {}'.format(externalLink))
     followExternalOnly(externalLink)
-    followExternalOnly('http://oreilly.com')
+    followExternalOnly('https://stackoverflow.com/')
 
 allExtLinks = set()
 allIntLinks = set()
@@ -83,5 +82,6 @@ def getAllExternalLinks(siteUrl):
             allIntLinks.add(link)
             getAllExternalLinks(link)
 
-allIntLinks.add('http://oreilly.com')
+#allIntLinks.add('https://stackoverflow.com/')
+followExternalOnly('https://stackoverflow.com/')
 getAllExternalLinks('https://stackoverflow.com/')
