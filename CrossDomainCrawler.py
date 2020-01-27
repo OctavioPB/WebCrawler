@@ -33,7 +33,8 @@ def getInternalLinks(bs, includeUrl):
 def getExternalLinks(bs, excludeUrl):
     externalLinks = []
     # Finds all links that start with "http" that do
-    #not contain the current URL
+    # not contain the current URL
+
     for link in bs.find_all('a',
         href=re.compile('^(http|www)((?!'+excludeUrl+').)*$')):
         if link.attrs['href'] is not None:
@@ -83,4 +84,4 @@ def getAllExternalLinks(siteUrl):
             getAllExternalLinks(link)
 
 allIntLinks.add('http://oreilly.com')
-getAllExternalLinks('http://oreilly.com')
+getAllExternalLinks('https://stackoverflow.com/')
