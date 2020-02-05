@@ -5,6 +5,10 @@ import re
 import datetime
 import random
 
+
+
+#TODO: Change source address to avoid banning.
+
 # Set up environment variables
 pages = set()
 random.seed(datetime.datetime.now())
