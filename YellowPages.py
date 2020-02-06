@@ -1,17 +1,25 @@
+"""
+=============================================
+Octavio Perez
+
+Web scrapping Tutorial 2
+IN: https://www.linkedin.com/in/operezbravo/
+GIT: https://github.com/OctavioPB
+=============================================
+"""
+
+
 from urllib.request import urlopen
 from urllib.error import HTTPError
 from bs4 import BeautifulSoup
 import csv
 import pandas as pd
-import re
-import string
 
 linkList = []
 infoIterable = []
 urllist = []
 
 ''' Custom made function to scrap Yellow Pages website'''
-
 
 def scrapper(url):
     html = urlopen(url)
