@@ -1,4 +1,5 @@
 from urllib.request import urlopen
+from urllib.error import  HTTPError
 from bs4 import BeautifulSoup
 import csv
 
@@ -15,20 +16,30 @@ def scrapper(url):
 
     for info in infoContainer:
         try:
+
             name = info.find('a', {'class': 'business-name'}).get_text()
             categories = info.find('div', {'class': 'categories'}).get_text()
-            phone = info.find('div', {'class': 'phones phone primary'}).get_text()
-            address = info.find('div', {'class': 'street-address'}).get_text()
-            locality = info.find('div', {'class': 'locality'}).get_text()
-
+            try:
+                phone = info.find('div', {'class': 'phones phone primary'}).get_text()
+            except:
+                phone = 'No phone'
+            try:
+                address = info.find('div', {'class': 'street-address'}).get_text()
+            except:
+                address = info.find('p', {'class': 'adr'}).get_text()
+            try:
+                locality = info.find('div', {'class': 'locality'}).get_text()
+            except:
+                locality = info.find('p', {'class': 'adr'}).get_text()
             row = (name, categories, phone, address, locality)
             infoIterable.append(row)
 
-            with open('results2.csv', 'w', newline='') as scrappy:
+            with open('results3.csv', 'w', newline='') as scrappy:
                 writer = csv.writer(scrappy)
                 writer.writerows(infoIterable)
         except:
-            print(infoIterable)
+            print('class Error')
+            continue
 
 def urlmaker(citylist):
 
@@ -38,12 +49,23 @@ def urlmaker(citylist):
         url = 'https://www.yellowpages.com/search?search_terms=dairy+farm&geo_location_terms=' + city + '%2C+CA'
         urllist.append(url)
     return urllist
-    #scrapper(url)
+
 
 ''' Start of the program'''
 
-cities = ('Fresno', 'Los Angeles', 'Sacramento', 'San Diego', 'Modesto', 'Irvine', 'San Bernardino')
+cities =  ('alameda', 'alamo', 'albany',
+          'albion', 'alderpoint','arbuckle', 'alhambra', 'aliso viejo',
+          'alleghany', 'alpaugh', 'alpine', 'alta', 'altadena',
+          'angelus oaks')
+
 iter = urlmaker(cities)
 print(iter)
+
 for url in iter:
-    scrapper(url)
+    try:
+        scrapper(url)
+        print(url)
+
+    except HTTPError as e:
+        print(url, ' No farms founded')
+        continue

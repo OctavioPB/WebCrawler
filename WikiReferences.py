@@ -24,16 +24,11 @@ def wikiscrapper(urllist):
                 row.append([column1.encode(encoding="UTF-8"), column2.encode(encoding="UTF-8")])
 
                 with open('wikires.csv', 'w', newline='') as csvfile:
-                    try:
-                        wikiwriter = csv.writer(csvfile)
-                        wikiwriter.writerows(row)
-                    except:
-                        print(column1+' Skipped because encoding')
-
-                linkList.append(link.attrs['title']) # regresa una lista que contiene los titulos de todos los articulos con referencias
+                    wikiwriter = csv.writer(csvfile)
+                    wikiwriter.writerows(row)
+                linkList.append(link.attrs['title'])
                 linkURL.append(link.attrs['href'])
-
-    return #linkList, linkURL
+    return None
 
 def urlmaker(list):
     urllist = []
@@ -43,8 +38,11 @@ def urlmaker(list):
         urllist.append(url)
     return urllist
 
-articles = ('Combination', 'Computer scientist', 'Mathematician', 'Charles Kingsley', 'Evolution')
+articles = ('Combination',
+            'Computer scientist',
+            'Mathematician',
+            'Charles Kingsley',
+            'Charlemagne',
+            'Reference')
 urllist = urlmaker(articles)
-#wikiscrapper(urllist)
 wikiscrapper(urllist)
-#print(urllist)
