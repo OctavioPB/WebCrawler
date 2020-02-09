@@ -1,3 +1,13 @@
+"""
+=============================================
+Octavio Perez
+
+Web scrapping Tutorial 3
+IN: https://www.linkedin.com/in/operezbravo/
+GIT: https://github.com/OctavioPB
+=============================================
+"""
+
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import re

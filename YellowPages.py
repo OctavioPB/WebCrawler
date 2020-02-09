@@ -56,6 +56,7 @@ def scrapper(url):
             print('Class Error')
             continue
 
+''' Generate the list of yellow pages URLs '''
 
 def urlmaker(citylist):
     for city in citylist:
@@ -70,8 +71,10 @@ def urlmaker(citylist):
 ''' Start of the program'''
 
 cities = ('arbuckle', 'alameda', 'alamo', 'albany',
-          'albion', 'alderpoint', 'alhambra', 'aliso viejo', 'alleghany', 'alpaugh', 'alpine', 'alta', 'altadena',
-          'angelus oaks')
+          'albion', 'alderpoint', 'alhambra',
+          'aliso viejo', 'alleghany', 'alpaugh',
+          'alpine', 'alta', 'altadena',
+          'angelus oaks', 'Sacramento', 'Los Angeles')
 
 iter = urlmaker(cities)
 print(iter)
